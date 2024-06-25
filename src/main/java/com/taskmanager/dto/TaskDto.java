@@ -10,22 +10,6 @@ public class TaskDto {
 	private Integer id;
 	private String username;
 
-	public String getContent() {
-		return content;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public String getName() {
-		return username;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
 	public boolean isComplete() {
 		return complete;
 	}
@@ -34,16 +18,24 @@ public class TaskDto {
 		this.complete = complete;
 	}
 
+	public String getContent() {
+		return content;
+	}
+
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public void setName(String name) {
-		this.username = name;
+	public String getUsername() {
+		return username;
 	}
 
 	public void setUsername(String username) {

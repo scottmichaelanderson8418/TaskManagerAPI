@@ -13,9 +13,9 @@ import org.springframework.web.context.request.WebRequest;
 public class GlobalExceptionHandler {
 
 	
-	@ExceptionHandler(PrintDrawingNotFoundException.class)
+	@ExceptionHandler(TaskNotFoundException.class)
 	public ResponseEntity<ErrorObject> handlePokemonNotFoundException(
-			PrintDrawingNotFoundException ex, WebRequest request) {
+			TaskNotFoundException ex, WebRequest request) {
 		ErrorObject errorObject = new ErrorObject();
 
 		errorObject.setStatusCode(HttpStatus.NOT_FOUND.value());
