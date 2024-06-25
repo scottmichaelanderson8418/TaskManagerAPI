@@ -11,19 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.taskmanager.model.MyUser;
 import com.taskmanager.repository.MyUserRepository;
 
-
 @RestController
 public class RegistrationController {
 
-	
 	@Autowired
 	private MyUserRepository myUserRepository; // Repository for managing user data
 
-	
 	@Autowired
 	private PasswordEncoder passwordEncoder; // Encoder for password hashing
 
-	
 	@PostMapping("/register/user")
 	public ResponseEntity<String> createUser(@RequestBody MyUser user) {
 
