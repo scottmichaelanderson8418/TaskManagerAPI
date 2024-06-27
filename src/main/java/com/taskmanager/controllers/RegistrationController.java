@@ -1,9 +1,12 @@
 package com.taskmanager.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,27 +18,54 @@ import com.taskmanager.repository.MyUserRepository;
 public class RegistrationController {
 
 	@Autowired
-	private MyUserRepository myUserRepository; // Repository for managing user data
+	private MyUserRepository myUserRepository;
+
+	/*
+	 * When the class has only one constructor argument, and the argument matches the field name -- then
+	 * spring can automatically identify the dependency to be injected public
+	 * RegistrationController(MyUserRepository myUserRepository) { this.myUserRepository =
+	 * myUserRepository; }
+	 */
 
 	@Autowired
-	private PasswordEncoder passwordEncoder; // Encoder for password hashing
+	PasswordEncoder passwordEncoder;
 
 	@PostMapping("/register/user")
-	public ResponseEntity<String> createUser(@RequestBody MyUser user) {
+	public ResponseEntity<?> registerNewUser(@RequestBody MyUser myUser) {
 
-		// Check if the username already exists
-		if (myUserRepository.findByUsername(user.getUsername()).isPresent()) {
-			// Return conflict response if username already exists
-			return new ResponseEntity<>("User already exists. Try another username.",
-					HttpStatus.CONFLICT);
+		if (myUserRepository.findByUsername(myUser.getUsername()).isPresent()) {
+
+			return new ResponseEntity<String>("User already exist in database", HttpStatus.OK);
+
 		}
 
-		// Encode user password before saving
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		// Save user details to the repository
-		myUserRepository.save(user);
+		MyUser newUser = new MyUser();
 
-		// Return success response upon successful registration
-		return new ResponseEntity<>("Registration is successful :)", HttpStatus.OK);
+		newUser.setPassword(passwordEncoder.encode(myUser.getPassword()));
+
+		newUser.setUsername(myUser.getUsername());
+
+		newUser.setRole(myUser.getRole());
+
+		myUserRepository.save(newUser);
+
+		return new ResponseEntity<MyUser>(newUser, HttpStatus.OK);
+
 	}
+
+	@GetMapping("/getAllUsers")
+	public List<MyUser> getUsers(MyUserRepository myUserRepository) {
+
+		List<MyUser> myUserList;
+
+		myUserList = myUserRepository.findAll();
+
+		// for (int i = 0; i < myUserList.size(); i++) {
+		// System.out.println(myUserList.get(i).toString());
+		// }
+
+		return myUserList;
+
+	}
+
 }

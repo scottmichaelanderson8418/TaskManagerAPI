@@ -1,78 +1,86 @@
+
 package com.taskmanager.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.taskmanager.service.MyUserDetailService;
+import com.taskmanager.auth.AuthenticationAccessHandler;
 
-
+// Spring will know this is a security configuration class
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+	// MyUserDetailService contains the
 	@Autowired
 	private MyUserDetailService userDetailService;
 
-	@Autowired
-	private JwtAuthenticationFilter jwtAuthenticationFilter;
-
-	
-
-	// the security filter chain tells the computer which urls to pass through and
-	// which to authenticate
+	// DaoAuthenticationProvider - uses a UserDetailsService implementation to load
+	// user details from the data store
+	// The service will fetch the user's username, password, authorities (roles),
+	// and other relevant information
+	// Spring Security provides a "UserDetails" interface that you can implement to
+	// represent your user data
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-
-		// we disable csrf to enable post request
-		return httpSecurity.csrf(AbstractHttpConfigurer::disable)
-
-				// lambda expression uses the httpSecurity.authorizeHttpRequests method with
-				// "registry" as an argument to defined the authorization rules yeah
-
-				.authorizeHttpRequests(registry -> {
-
-					registry.requestMatchers("/home", "/register
-	@Bean
-	public UserDetailsService userDetailsService() {
-		return userDetailService;
-	}
-
-	
-	@Bean
-	public AuthenticationProvider authenticationProvider() {
+	AuthenticationProvider authenticationProvider() {
+		// DaoAuthenticationProvider is a class from spring security
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-		// set the userDetailsService for authentication
 		provider.setUserDetailsService(userDetailService);
-		// Set password encoder (which is BCryptPasswordEncoder)
 		provider.setPasswordEncoder(passwordEncoder());
 		return provider;
 	}
 
-	
 	@Bean
-	public AuthenticationManager authenticationManager() {
-		// Create AuthenticationManager using the configured authentication provider
-		return new ProviderManager(authenticationProvider());
-	}
-
-	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		// Use BCryptPasswordEncoder for password encoding
+	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
+	/*
+	 * Note: the "/login" endpoint is located in the securityFilterChain because we want it separate from the
+	 * RestController. Spring Security will create a "session
+	 */
+	// Provides a default configuration for me.
+	// "Everything behind the /login screen"
+	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+		System.out.println("Entered.........securityFilterChain()");
+		// by customizing the "authorizeHttpRequest" we got rid of the default login we had
+		// Note: "CSRF" Cross Site Request Forgery
+		// If "CSRF" is enabled all postrequest will be block
+
+		System.out.println("Exited.........securityFilterChain()");
+		return httpSecurity.csrf(AbstractHttpConfigurer::disable)
+
+				.authorizeHttpRequests(registry -> {
+					registry.requestMatchers("/home", "/scottapi/**", "/getAllUsers", "/register/**", "/login")
+							.permitAll();
+					registry.requestMatchers("/admin/**").hasRole("ADMIN");
+					registry.requestMatchers("/user/**").hasRole("USER");
+
+					registry.anyRequest().authenticated();
+
+					// when we add httpSecurity we need to add the default formLogin page
+				}).formLogin(httpSecurityFormLoginConfigurer -> {
+					httpSecurityFormLoginConfigurer.loginPage("/login")
+							.successHandler(new AuthenticationAccessHandler()).permitAll();
+				}).build(); // build the HTTP Security
+
+	}
+
+	@Bean
+	public UserDetailsService userDetailsService() {
+
+		return userDetailService;
+	}
+
 }

@@ -62,7 +62,8 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public void deleteByTaskId(int id) {
-		Task task = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException("Task could not be deleted"));
+		Task task = taskRepository.findById(id)
+				.orElseThrow(() -> new TaskNotFoundException("Task could not be deleted"));
 
 		taskRepository.delete(task);
 	}
@@ -79,7 +80,8 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public Page<TaskDto> findTasksWithPaginationAndSorting(int offset, int pageSize, String field) {
-		Page<Task> drawings = taskRepository.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(field)));
+		Page<Task> drawings = taskRepository
+				.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(field)));
 
 		// Convert Page<Task> to List<TaskDto>
 		List<TaskDto> dtos = drawings.stream().map(this::convertToDto).collect(Collectors.toList());
@@ -116,8 +118,8 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public TaskDto getTaskById(int id) {
-		Task task = taskRepository.findById(id)
-				.orElseThrow(() -> new TaskNotFoundException("Print drawing could not be found :("));
+		Task task = taskRepository.findById(id).orElseThrow(
+				() -> new TaskNotFoundException("Print drawing could not be found :("));
 		return mapToDto(task);
 	}
 
@@ -132,7 +134,8 @@ public class TaskServiceImpl implements TaskService {
 
 		try {
 			// Find the Task entity by ID or throw an exception if not found
-			Task task = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException("Task could not be updated"));
+			Task task = taskRepository.findById(id)
+					.orElseThrow(() -> new TaskNotFoundException("Task could not be updated"));
 
 			// Create an updated Task entity
 			Task updatedTask = createTaskUpdate(task, taskUpdate);

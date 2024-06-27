@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,29 +24,20 @@ import com.taskmanager.dto.TaskDto;
 import com.taskmanager.dto.TaskResponse;
 import com.taskmanager.model.MyUser;
 import com.taskmanager.repository.MyUserRepository;
-import com.taskmanager.security.JwtService;
-import com.taskmanager.security.LoginForm;
-import com.taskmanager.service.MyUserDetailService;
+import com.taskmanager.security.MyUserDetailService;
 import com.taskmanager.service.TaskService;
 
 @RequestMapping(value = "/api/taskmanager")
 @RestController
 public class TaskController {
 
-	// Autowire necessary dependencies
-	@Autowired
-	private AuthenticationManager authenticationManager;
-
 	// The AuthenticationManager will help us authenticate by username and password
-
-	@Autowired
-	private JwtService jwtService;
 
 	// Initialize a logger for the class
 	Logger logger = LoggerFactory.getLogger(TaskController.class.getName());
 
 	@Autowired
-	private MyUserDetailService myUserDetailService;
+	private MyUserDetailService myUserDetailsService;
 
 	@Autowired
 	private MyUserRepository myUserRepository;
@@ -56,37 +45,11 @@ public class TaskController {
 	@Autowired
 	private TaskService taskService;
 
+	@Autowired
+	PasswordEncoder passwordEncoder;
+
 	public TaskController(TaskService taskService) {
 		this.taskService = taskService;
-	}
-
-	@PostMapping("/authenticate")
-	public String authenticateAndGetToken(@RequestBody LoginForm loginForm) {
-
-		logger.trace("Entered......authenticateAndGetToken() ");
-		logger.debug("Entered......authenticateAndGetToken() ");
-
-		// the authenticationManager instance will call the "authenticate()"
-		// method and verify the username and password
-		// We will get an Authentication result object
-		org.springframework.security.core.Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(loginForm.username(), loginForm.password()));
-		// If credentials are authenticated then generate new token
-		if (authentication.isAuthenticated()) {
-
-			// The generateToken method requires the UserDetail Class
-			// Generate JWT token upon successful authentication
-
-			logger.trace("Exited..... authenticateAndGetToken() ");
-			logger.debug("Exited.....  authenticateAndGetToken()");
-			return jwtService.generateToken(myUserDetailService.loadUserByUsername(loginForm.username()));
-		} else {
-
-			logger.error("Error occurred during authentication process");
-			// Throw exception for invalid credentials
-			throw new UsernameNotFoundException("Invalid credentials");
-		}
-
 	}
 
 	@PostMapping("/task/create")
@@ -130,7 +93,7 @@ public class TaskController {
 
 	@GetMapping("/tasks/findAll/{searchField}")
 	public List<TaskDto> getProductsWithSort(@PathVariable("searchField") String field) {
-		List<TaskDto> drawings = taskService.findAllTaskWithSorting(field);
+		List<TaskDto> drawings = taskService.findAllTasksWithSorting(field);
 		return drawings;
 	}
 

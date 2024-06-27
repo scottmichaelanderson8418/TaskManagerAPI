@@ -19,7 +19,7 @@ public interface TaskService {
 
 	public void deleteByTaskId(int id);
 
-	public List<TaskDto> findAllTaskWithSorting(String field);
+	public List<TaskDto> findAllTasksWithSorting(String field);
 
 	public Page<TaskDto> findTasksWithPaginationAndSorting(int offset, int pageSize, String field);
 
