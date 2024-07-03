@@ -1,10 +1,14 @@
 
 package com.taskmanager.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,6 +25,8 @@ import com.taskmanager.auth.AuthenticationAccessHandler;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+	Logger logger = LoggerFactory.getLogger(SecurityConfiguration.class.getName());
+
 	// MyUserDetailService contains the
 	@Autowired
 	private MyUserDetailService userDetailService;
@@ -29,10 +35,11 @@ public class SecurityConfiguration {
 	// user details from the data store
 	// The service will fetch the user's username, password, authorities (roles),
 	// and other relevant information
-	// Spring Security provides a "UserDetails" interface that you can implement to
+	// Spring Security provides a "UserDetails" Longerface that you can implement to
 	// represent your user data
 	@Bean
 	AuthenticationProvider authenticationProvider() {
+
 		// DaoAuthenticationProvider is a class from spring security
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setUserDetailsService(userDetailService);
@@ -46,24 +53,22 @@ public class SecurityConfiguration {
 	}
 
 	/*
-	 * Note: the "/login" endpoint is located in the securityFilterChain because we want it separate from the
+	 * Note: the "/login" endpoLong is located in the securityFilterChain because we want it separate from the
 	 * RestController. Spring Security will create a "session
 	 */
 	// Provides a default configuration for me.
 	// "Everything behind the /login screen"
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		System.out.println("Entered.........securityFilterChain()");
+
 		// by customizing the "authorizeHttpRequest" we got rid of the default login we had
 		// Note: "CSRF" Cross Site Request Forgery
 		// If "CSRF" is enabled all postrequest will be block
 
-		System.out.println("Exited.........securityFilterChain()");
 		return httpSecurity.csrf(AbstractHttpConfigurer::disable)
 
 				.authorizeHttpRequests(registry -> {
-					registry.requestMatchers("/home", "/scottapi/**", "/getAllUsers", "/register/**", "/login")
-							.permitAll();
+					registry.requestMatchers("/home", "/scottapi/**", "/getAllUsers", "/register/**").permitAll();
 					registry.requestMatchers("/admin/**").hasRole("ADMIN");
 					registry.requestMatchers("/user/**").hasRole("USER");
 
@@ -75,6 +80,17 @@ public class SecurityConfiguration {
 							.successHandler(new AuthenticationAccessHandler()).permitAll();
 				}).build(); // build the HTTP Security
 
+	}
+
+	/**
+	 * Creates an AuthenticationManager bean.
+	 *
+	 * @return the authentication manager
+	 */
+	@Bean
+	public AuthenticationManager authenticationManager() {
+		// Create AuthenticationManager using the configured authentication provider
+		return new ProviderManager(authenticationProvider());
 	}
 
 	@Bean

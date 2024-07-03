@@ -4,12 +4,11 @@ import java.util.List;
 
 public class TaskResponse {
 
-	private List<TaskDto> content;
+	private List<TaskDto> myTaskDtoList;
 	private boolean last;
 	private int pageNo;
-
 	private int pageSize;
-	private long totalElements;
+	private Long totalElements;
 	private int totalPages;
 
 	public TaskResponse() {
@@ -20,11 +19,11 @@ public class TaskResponse {
 			List<TaskDto> content,
 			int pageNo,
 			int pageSize,
-			long totalElements,
+			Long totalElements,
 			int totalPages,
 			boolean last) {
 		super();
-		this.content = content;
+		this.myTaskDtoList = content;
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
 		this.totalElements = totalElements;
@@ -33,7 +32,7 @@ public class TaskResponse {
 	}
 
 	public List<TaskDto> getContent() {
-		return content;
+		return myTaskDtoList;
 	}
 
 	public int getPageNo() {
@@ -44,7 +43,7 @@ public class TaskResponse {
 		return pageSize;
 	}
 
-	public long getTotalElements() {
+	public Long getTotalElements() {
 		return totalElements;
 	}
 
@@ -57,7 +56,7 @@ public class TaskResponse {
 	}
 
 	public void setContent(List<TaskDto> content) {
-		this.content = content;
+		this.myTaskDtoList = content;
 	}
 
 	public void setLast(boolean last) {
@@ -72,7 +71,7 @@ public class TaskResponse {
 		this.pageSize = pageSize;
 	}
 
-	public void setTotalElements(long totalElements) {
+	public void setTotalElements(Long totalElements) {
 		this.totalElements = totalElements;
 	}
 

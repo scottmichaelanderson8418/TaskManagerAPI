@@ -7,7 +7,7 @@ public class TaskDto {
 
 	private boolean complete;
 	private String content;
-	private Integer id;
+	private int id;
 	private String username;
 
 	public boolean isComplete() {
@@ -26,11 +26,11 @@ public class TaskDto {
 		this.content = content;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
