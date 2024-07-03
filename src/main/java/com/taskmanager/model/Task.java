@@ -14,35 +14,35 @@ public class Task {
 	private String content;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 	private String username;
+
+	public String getContent() {
+		return content;
+	}
+
+	public int getId() {
+		return id;
+	}
 
 	public boolean isComplete() {
 		return complete;
+	}
+
+	public String getUsername() {
+		return username;
 	}
 
 	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
 
-	public String getContent() {
-		return content;
-	}
-
 	public void setContent(String content) {
 		this.content = content;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
 	}
 
 	public void setUsername(String username) {

@@ -6,8 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import com.taskmanager.model.Task;
 
-@Repository // Mark this interface as a Spring Data repository
+@Repository // Mark this Longerface as a Spring Data repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
 
 	void save(String string);
+
 }
