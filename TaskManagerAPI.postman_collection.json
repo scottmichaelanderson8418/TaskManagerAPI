@@ -1,16 +1,14 @@
 {
 	"info": {
-		"_postman_id": "ed58718d-4957-42fd-8752-22b704af9b6d",
+		"_postman_id": "a7772ae9-3b88-4130-8864-6966054d118b",
 		"name": "TaskManagerAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15945894"
+		"_exporter_id": "15945894",
+		"_collection_link": "https://planetary-spaceship-178806.postman.co/workspace/Scott_1~cc78b271-540d-4258-b264-7d0815bac579/collection/15945894-a7772ae9-3b88-4130-8864-6966054d118b?action=share&source=collection_link&creator=15945894"
 	},
 	"item": [
 		{
 			"name": "GET ALL MESSAGES",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -29,10 +27,6 @@
 				},
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": []
-				},
 				"url": {
 					"raw": "http://localhost:8080/api/getalltasks?pageNo=0&pageSize=10",
 					"protocol": "http",
@@ -64,6 +58,9 @@
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -76,7 +73,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/print/1",
+					"raw": "http://localhost:8080/api/task/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -84,7 +81,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"print",
+						"task",
 						"1"
 					]
 				}
@@ -98,7 +95,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n\r\n\r\n}",
+					"raw": "{\r\n\"content\":\"Hi scott your first message. Welcome my friend New Update #01:)\",\r\n\"username\":\"ScottAdminUser\",\r\n\"complete\": \"true\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -106,7 +103,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/print/update/8",
+					"raw": "http://localhost:8080/api/task/update/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -114,9 +111,9 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"print",
+						"task",
 						"update",
-						"8"
+						"1"
 					]
 				}
 			},
@@ -137,7 +134,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/print/delete/1",
+					"raw": "http://localhost:8080/api/task/delete/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -145,9 +142,9 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"print",
+						"task",
 						"delete",
-						"1"
+						"2"
 					]
 				}
 			},

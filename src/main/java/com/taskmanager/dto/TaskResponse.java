@@ -2,10 +2,13 @@ package com.taskmanager.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({ "content", "last", "pageNo", "pageSize", "totalElements", "totalPages" })
 public class TaskResponse {
 
-	private List<TaskDto> myTaskDtoList;
 	private boolean last;
+	private List<TaskDto> content;
 	private int pageNo;
 	private int pageSize;
 	private Long totalElements;
@@ -15,15 +18,9 @@ public class TaskResponse {
 
 	}
 
-	public TaskResponse(
-			List<TaskDto> content,
-			int pageNo,
-			int pageSize,
-			Long totalElements,
-			int totalPages,
-			boolean last) {
+	public TaskResponse(List<TaskDto> content, int pageNo, int pageSize, Long totalElements, int totalPages, boolean last) {
 		super();
-		this.myTaskDtoList = content;
+		this.content = content;
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
 		this.totalElements = totalElements;
@@ -31,8 +28,12 @@ public class TaskResponse {
 		this.last = last;
 	}
 
-	public List<TaskDto> getContent() {
-		return myTaskDtoList;
+	public List<TaskDto> getConent() {
+		return content;
+	}
+
+	public boolean getLast() {
+		return last;
 	}
 
 	public int getPageNo() {
@@ -51,12 +52,8 @@ public class TaskResponse {
 		return totalPages;
 	}
 
-	public boolean getLast() {
-		return last;
-	}
-
 	public void setContent(List<TaskDto> content) {
-		this.myTaskDtoList = content;
+		this.content = content;
 	}
 
 	public void setLast(boolean last) {

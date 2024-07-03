@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.taskmanager.dto.MyUserDto;
@@ -19,7 +18,6 @@ import com.taskmanager.model.MyUser;
 import com.taskmanager.repository.MyUserRepository;
 import com.taskmanager.service.MyUserService;
 
-@RequestMapping(value = "/api")
 @RestController
 public class RegistrationController {
 	Logger logger = LoggerFactory.getLogger(RegistrationController.class.getName());
@@ -31,9 +29,10 @@ public class RegistrationController {
 	private MyUserRepository myUserRepository;
 
 	/*
-	 * When the class has only one constructor argument, and the argument matches the field name -- then spring can
-	 * automatically identify the dependency to be injected public RegistrationController(MyUserRepository
-	 * myUserRepository) { this.myUserRepository = myUserRepository; }
+	 * When the class has only one constructor argument, and the argument matches
+	 * the field name -- then spring can automatically identify the dependency to be
+	 * injected public RegistrationController(MyUserRepository myUserRepository) {
+	 * this.myUserRepository = myUserRepository; }
 	 */
 
 	@Autowired
