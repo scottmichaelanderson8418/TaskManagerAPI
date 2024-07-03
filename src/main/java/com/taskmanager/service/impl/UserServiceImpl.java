@@ -61,7 +61,7 @@ public class UserServiceImpl implements MyUserService {
 		MyUserDto myUserDto = new MyUserDto();
 
 		// ... map properties from myUser to dto
-
+		myUserDto.setId(myUser.getId());
 		myUserDto.setUsername(myUser.getUsername());
 		myUserDto.setPassword(myUser.getPassword());
 		myUserDto.setRole(myUser.getRole());

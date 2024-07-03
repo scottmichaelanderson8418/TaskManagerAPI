@@ -71,7 +71,7 @@ public class TaskController {
 		taskService.deleteByTaskId(id);
 
 		logger.trace("EXITED……………………………………deleteTaskById()");
-		return new ResponseEntity<>("Successfully deleted prLong drawing id = " + id, HttpStatus.OK);
+		return new ResponseEntity<>("Successfully deleted task id = " + id, HttpStatus.OK);
 	}
 
 	@GetMapping("/getalltasks")
