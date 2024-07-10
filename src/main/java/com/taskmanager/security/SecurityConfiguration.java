@@ -35,7 +35,7 @@ public class SecurityConfiguration {
 	// user details from the data store
 	// The service will fetch the user's username, password, authorities (roles),
 	// and other relevant information
-	// Spring Security provides a "UserDetails" Longerface that you can implement to
+	// Spring Security provides a "UserDetails" interface that you can implement to
 	// represent your user data
 	@Bean
 	AuthenticationProvider authenticationProvider() {
@@ -53,7 +53,7 @@ public class SecurityConfiguration {
 	}
 
 	/*
-	 * Note: the "/login" endpoLong is located in the securityFilterChain because we want it separate from the
+	 * Note: the "/login" end point is located in the securityFilterChain because we want it separate from the
 	 * RestController. Spring Security will create a "session
 	 */
 	// Provides a default configuration for me.
@@ -68,7 +68,7 @@ public class SecurityConfiguration {
 		return httpSecurity.csrf(AbstractHttpConfigurer::disable)
 
 				.authorizeHttpRequests(registry -> {
-					registry.requestMatchers("/home", "/scottapi/**", "/getAllUsers", "/register/**").permitAll();
+					registry.requestMatchers("/home", "/getAllUsers", "/register/**").permitAll();
 					registry.requestMatchers("/admin/**").hasRole("ADMIN");
 					registry.requestMatchers("/user/**").hasRole("USER");
 
