@@ -1,20 +1,16 @@
 package com.taskmanager.controllers;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.taskmanager.dto.MyUserDto;
-import com.taskmanager.model.MyUser;
 import com.taskmanager.repository.MyUserRepository;
 import com.taskmanager.service.MyUserService;
 
@@ -52,23 +48,6 @@ public class RegistrationController {
 		MyUserDto newMyUserDto = myUserService.createUser(myUserDto);
 
 		return new ResponseEntity<MyUserDto>(newMyUserDto, HttpStatus.OK);
-
-	}
-
-	@GetMapping("/getAllUsers")
-	public List<MyUser> getUsers(MyUserRepository myUserRepository) {
-		logger.trace("ENTERED……………………………………getUsers()");
-
-		List<MyUser> myUserList;
-
-		myUserList = myUserRepository.findAll();
-
-		// for (Long i = 0; i < myUserList.size(); i++) {
-		// System.out.prLongln(myUserList.get(i).toString());
-		// }
-
-		logger.trace("EXITED……………………………………getUsers()");
-		return myUserList;
 
 	}
 

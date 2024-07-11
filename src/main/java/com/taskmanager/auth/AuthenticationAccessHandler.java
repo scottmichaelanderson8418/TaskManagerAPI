@@ -19,8 +19,8 @@ public class AuthenticationAccessHandler extends SavedRequestAwareAuthentication
 	// when the login is a success then grant "ROLE_ADMIN" and land on the
 	// /admin/home or /user/home page
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws ServletException, IOException {
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+			throws ServletException, IOException {
 		logger.trace("ENTERED……………………………………onAuthenticationSuccess()");
 
 		// if the granted authority is equal to"ROLE_ADMIN"
@@ -29,13 +29,13 @@ public class AuthenticationAccessHandler extends SavedRequestAwareAuthentication
 
 		if (isAdmin) {
 			setDefaultTargetUrl("/admin/home");
-			logger.trace("EXITED……………………………………onAuthenticationSuccess()");
+			logger.trace("EXITED……………………………………onAuthenticationSuccess()---> /admin/home");
 		} else {
+			logger.trace("EXITED……………………………………onAuthenticationSuccess()--> /user/home");
 			setDefaultTargetUrl("/user/home");
 		}
 		// setDefaultTargetUrl();
 		super.onAuthenticationSuccess(request, response, authentication);
 
-		logger.trace("EXITED……………………………………onAuthenticationSuccess()");
 	}
 }

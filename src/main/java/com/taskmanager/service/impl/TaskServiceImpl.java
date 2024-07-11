@@ -38,6 +38,7 @@ public class TaskServiceImpl implements TaskService {
 		taskDto.setContent(task.getContent());
 		taskDto.setComplete(task.isComplete());
 		logger.trace("EXITED……………………………………convertToDto()");
+
 		return taskDto;
 	}
 
@@ -70,8 +71,7 @@ public class TaskServiceImpl implements TaskService {
 	public void deleteByTaskId(int id) {
 		logger.trace("Entered......deleteByTaskId() ");
 
-		Task task = taskRepository.findById(id)
-				.orElseThrow(() -> new MyUserNotFoundException("MyUser could not be deleted..."));
+		Task task = taskRepository.findById(id).orElseThrow(() -> new MyUserNotFoundException("MyUser could not be deleted..."));
 		logger.trace("Exited......deleteByTaskId() ");
 		taskRepository.deleteById(id);
 
@@ -140,8 +140,7 @@ public class TaskServiceImpl implements TaskService {
 
 		try {
 			// Find the Task entity by ID or throw an exception if not found
-			Task task = taskRepository.findById(id)
-					.orElseThrow(() -> new TaskNotFoundException("Task could not be updated"));
+			Task task = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException("Task could not be updated"));
 
 			// Create an updated Task entity
 			Task updatedTask = createTaskUpdate(task, taskUpdate);

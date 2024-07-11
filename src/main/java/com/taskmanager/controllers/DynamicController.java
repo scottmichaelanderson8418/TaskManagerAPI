@@ -49,7 +49,7 @@ public class DynamicController {
 		logger.trace("ENTERED……………………………………handleUserHome()");
 		logger.trace("EXITED……………………………………handleUserHome()");
 
-		return "home_user :)";
+		return "home_user";
 	}
 
 	@GetMapping("/home")

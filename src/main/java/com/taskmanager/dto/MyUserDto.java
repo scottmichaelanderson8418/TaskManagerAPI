@@ -1,13 +1,14 @@
 package com.taskmanager.dto;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "myusers")
+@JsonPropertyOrder({ "id", "username", "password", "role" })
 public class MyUserDto {
 
 	@Id

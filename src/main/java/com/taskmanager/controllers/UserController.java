@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.taskmanager.dto.MyUserDto;
@@ -24,7 +23,6 @@ import com.taskmanager.repository.MyUserRepository;
 import com.taskmanager.security.MyUserDetailService;
 import com.taskmanager.service.MyUserService;
 
-@RequestMapping(value = "/api")
 @RestController
 public class UserController {
 
@@ -72,6 +70,7 @@ public class UserController {
 
 	@GetMapping("/admin/user/{id}")
 	public ResponseEntity<MyUserDto> getUserDetail(@PathVariable("id") int id) {
+
 		logger.trace("ENTERED……………………………………getUserDetail()");
 		logger.trace("EXITED……………………………………getUserDetail()");
 		return new ResponseEntity<>(userService.getMyUserById(id), HttpStatus.OK);

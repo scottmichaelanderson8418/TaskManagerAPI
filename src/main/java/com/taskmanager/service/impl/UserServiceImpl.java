@@ -86,12 +86,14 @@ public class UserServiceImpl implements MyUserService {
 	}
 
 	public MyUser createUserUpdate(MyUser myUserDto, MyUserDto myUserDtoUpdate) {
-		logger.trace("Entered......createUserUpdate() ");
 
+		logger.trace("Entered......createUserUpdate() ");
+		myUserDto.setId(myUserDtoUpdate.getId());
 		myUserDto.setUsername(myUserDtoUpdate.getUsername());
 		myUserDto.setUsername(myUserDtoUpdate.getUsername());
 		myUserDto.setRole(myUserDtoUpdate.getRole());
 		logger.trace("Exited......createUserUpdate() ");
+
 		return myUserDto;
 	}
 
@@ -132,18 +134,23 @@ public class UserServiceImpl implements MyUserService {
 	public MyUserDto getMyUserById(int id) {
 		logger.trace("Entered...........................getMyUserById()");
 
-		MyUser myUserDto = myUserRepository.findById(id)
+		MyUser myUser = myUserRepository.findById(id)
 				.orElseThrow(() -> new MyUserNotFoundException("User Id could not be found :("));
 		logger.trace("Exited...........................getMyUserById()");
-		return mapToDto(myUserDto);
+		return mapToDto(myUser);
 	}
 
-	private MyUserDto mapToDto(MyUser myUserDto) {
+	private MyUserDto mapToDto(MyUser myUser) {
 		logger.trace("Entered...........................mapToDto()");
 
-		MyUserDto MyUserDto = new MyUserDto();
+		MyUserDto newMyUserDto = new MyUserDto();
+		newMyUserDto.setId(myUser.getId());
+		newMyUserDto.setPassword(myUser.getPassword());
+		newMyUserDto.setRole(myUser.getRole());
+		newMyUserDto.setUsername(myUser.getUsername());
+
 		logger.trace("Exited...........................mapToDto()");
-		return MyUserDto;
+		return newMyUserDto;
 	}
 
 	@Override
@@ -153,7 +160,7 @@ public class UserServiceImpl implements MyUserService {
 		try {
 			// Find the MyUser entity by ID or throw an exception if not found
 			MyUser myUserDto = myUserRepository.findById(id)
-					.orElseThrow(() -> new MyUserNotFoundException("MyUser could not be updated..."));
+					.orElseThrow(() -> new MyUserNotFoundException("MyUser could not be found..."));
 
 			// Create an updated MyUser entity
 			MyUser updatedMyUser = createUserUpdate(myUserDto, myUserDtoUpdate);
