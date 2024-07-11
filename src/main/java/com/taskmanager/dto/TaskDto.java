@@ -2,7 +2,7 @@ package com.taskmanager.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ "id", "name", "content", "complete" })
+@JsonPropertyOrder({ "id", "username", "content", "complete" })
 public class TaskDto {
 
 	private boolean complete;

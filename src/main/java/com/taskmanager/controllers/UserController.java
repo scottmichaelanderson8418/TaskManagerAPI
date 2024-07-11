@@ -59,6 +59,14 @@ public class UserController {
 		return new ResponseEntity<>("User found and deleted", HttpStatus.OK);
 	}
 
+	@GetMapping("/admin/activeuser")
+	public ResponseEntity<MyUserDto> getActiveUser() {
+		logger.trace("ENTERED……………………………………getActiveUser()");
+
+		logger.trace("EXITED……………………………………getActiveUser()");
+		return new ResponseEntity<>(userService.currentUser(), HttpStatus.OK);
+	}
+
 	@GetMapping("/admin/getallusers")
 	public ResponseEntity<List<MyUser>> getAllUsers() {
 		logger.trace("ENTERED……………………………………getAllUsers()");
@@ -76,7 +84,7 @@ public class UserController {
 		return new ResponseEntity<>(userService.getMyUserById(id), HttpStatus.OK);
 	}
 
-	@PutMapping("/admin/user/update/{id}")
+	@PutMapping("/admin/userdetail/update/{id}")
 	public ResponseEntity<MyUserDto> updateUserDetail(@RequestBody MyUserDto myUserUpdate, @PathVariable("id") int id) {
 		logger.trace("ENTERED……………………………………updateUserDetail()");
 

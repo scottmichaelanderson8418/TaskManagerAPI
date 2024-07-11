@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -85,16 +88,18 @@ public class UserServiceImpl implements MyUserService {
 		return myUser;
 	}
 
-	public MyUser createUserUpdate(MyUser myUserDto, MyUserDto myUserDtoUpdate) {
+	public MyUser createUserUpdate(MyUser myUser, MyUserDto myUserDtoUpdate) {
 
 		logger.trace("Entered......createUserUpdate() ");
-		myUserDto.setId(myUserDtoUpdate.getId());
-		myUserDto.setUsername(myUserDtoUpdate.getUsername());
-		myUserDto.setUsername(myUserDtoUpdate.getUsername());
-		myUserDto.setRole(myUserDtoUpdate.getRole());
+
+		myUser.setId(myUserDtoUpdate.getId());
+		myUser.setUsername(myUserDtoUpdate.getUsername());
+		myUser.setUsername(myUserDtoUpdate.getUsername());
+		myUser.setRole(myUserDtoUpdate.getRole());
+
 		logger.trace("Exited......createUserUpdate() ");
 
-		return myUserDto;
+		return myUser;
 	}
 
 	public List<MyUserDto> findAllUsers() {
@@ -159,11 +164,11 @@ public class UserServiceImpl implements MyUserService {
 
 		try {
 			// Find the MyUser entity by ID or throw an exception if not found
-			MyUser myUserDto = myUserRepository.findById(id)
+			MyUser myUser = myUserRepository.findById(id)
 					.orElseThrow(() -> new MyUserNotFoundException("MyUser could not be found..."));
 
 			// Create an updated MyUser entity
-			MyUser updatedMyUser = createUserUpdate(myUserDto, myUserDtoUpdate);
+			MyUser updatedMyUser = createUserUpdate(myUser, myUserDtoUpdate);
 
 			// Save the updated MyUser entity
 			MyUser newMyUser = myUserRepository.save(updatedMyUser);
@@ -185,8 +190,30 @@ public class UserServiceImpl implements MyUserService {
 
 		MyUser myUser = myUserRepository.findById(id)
 				.orElseThrow(() -> new MyUserNotFoundException("MyUser could not be deleted..."));
+
+		if (myUserRepository.findById(id).isPresent()) {
+
+			myUserRepository.deleteById(id);
+		}
+
 		logger.trace("Exited......deleteMyUserById() ");
-		myUserRepository.deleteById(id);
+	}
+
+	@Override
+	public MyUserDto currentUser() {
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		System.out.println("authentication.getPrincipal() = " + authentication.getPrincipal());
+
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		String username = userDetails.getUsername();
+		System.out.println("username ================= " + username);
+
+		MyUser myUser = myUserRepository.findByUsername(userDetails.getUsername())
+				.orElseThrow(() -> new MyUserNotFoundException("MyUser could not be found..."));
+
+		return mapToDto(myUser);
 	}
 
 }

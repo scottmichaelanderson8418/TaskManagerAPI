@@ -15,4 +15,6 @@ public interface MyUserService {
 
 	public MyUserDto updateMyUserDetail(MyUserDto myUserDtoUpdate, int id);
 
+	public MyUserDto currentUser();
+
 }
