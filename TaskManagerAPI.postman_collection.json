@@ -7,6 +7,72 @@
 	},
 	"item": [
 		{
+			"name": "REGISTER USER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\": \"ScottAdmin\",\r\n\"password\": \"1234\",\r\n\"role\":\"ADMIN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/register/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "ScottAdmin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "CREATE NEW TASK",
 			"request": {
 				"auth": {
@@ -28,7 +94,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"content\":\"Hi scott your first mesWeeeesage\",\r\n\"username\":\"ScottAdminUser\",\r\n\"complete\": \"false\"\r\n}",
+					"raw": "{\r\n\"content\":\"Hi this is a task message\",\r\n\"complete\": \"false\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -58,7 +124,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"content\":\"Hi scott your first message. Welcome my friend New Update #01:)\",\r\n\"username\":\"ScottAdminUser\",\r\n\"complete\": \"true\"\r\n}",
+					"raw": "{\r\n\"content\":\"Hi scott your first message. Welcome my friend New Update #01:)\",\r\n\"complete\": \"true\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -170,7 +236,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n\r\n\"name\":\"Scott Pokesdadasdasdmon\",\r\n\"type\": \"earth type\"\r\n\r\n\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -178,7 +244,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/task/delete/2",
+					"raw": "http://localhost:8080/api/task/delete/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -188,7 +254,7 @@
 						"api",
 						"task",
 						"delete",
-						"2"
+						"1"
 					]
 				}
 			},

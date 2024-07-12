@@ -9,13 +9,12 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "myusers")
 public class MyUser {
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String username;
 	private String password;
 	private String role; // Eg: ADMIN, USER
-	private String username;
 
 	public Long getId() {
 		return id;

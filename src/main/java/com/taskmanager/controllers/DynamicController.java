@@ -62,7 +62,7 @@ public class DynamicController {
 
 	@GetMapping("/login")
 	public String handleLogin() {
-		System.out.println("POOOOOOOOOOOOOOOOOP");
+
 		logger.trace("ENTERED……………………………………handleLogin()");
 		logger.trace("EXITED……………………………………handleLogin()");
 

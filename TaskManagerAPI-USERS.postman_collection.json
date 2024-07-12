@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "ACTIVE USER",
+			"name": "WHICH USER IS LOGGED IN",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -27,7 +27,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/admin/getallusers",
+					"raw": "http://localhost:8080/admin/activeuser",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -35,7 +35,7 @@
 					"port": "8080",
 					"path": [
 						"admin",
-						"getallusers"
+						"activeuser"
 					]
 				}
 			},
@@ -127,15 +127,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/task/delete/2",
+					"raw": "http://localhost:8080/admin/user/delete/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"api",
-						"task",
+						"admin",
+						"user",
 						"delete",
 						"2"
 					]

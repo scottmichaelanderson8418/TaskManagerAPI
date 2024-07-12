@@ -2,22 +2,26 @@ package com.taskmanager.dto;
 
 import java.util.List;
 
-//
 public class MyUserResponse {
 
+	private List<MyUserDto> username;
 	private boolean last;
 	private int pageNo;
 	private int pageSize;
-
 	private Long totalElements;
 	private int totalPages;
-	private List<MyUserDto> username;
 
 	public MyUserResponse() {
 
 	}
 
-	public MyUserResponse(List<MyUserDto> username, boolean last, int pageNo, int pageSize, Long totalElements, int totalPages) {
+	public MyUserResponse(
+			List<MyUserDto> username,
+			boolean last,
+			int pageNo,
+			int pageSize,
+			Long totalElements,
+			int totalPages) {
 		super();
 		this.username = username;
 		this.last = last;

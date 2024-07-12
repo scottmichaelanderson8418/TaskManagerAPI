@@ -7,6 +7,8 @@ public class TaskDto {
 
 	private boolean complete;
 	private String content;
+	// @Id
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String username;
 

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.taskmanager.dto.MyUserDto;
 import com.taskmanager.dto.MyUserResponse;
+import com.taskmanager.exceptions.ActiveUserCannotBeDeletedException;
 import com.taskmanager.exceptions.MyUserNotFoundException;
 import com.taskmanager.model.MyUser;
 import com.taskmanager.repository.MyUserRepository;
@@ -188,12 +189,23 @@ public class UserServiceImpl implements MyUserService {
 	public void deleteMyUserById(int id) {
 		logger.trace("Entered......deleteMyUserById() ");
 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+		String activeUsername = userDetails.getUsername();
+
 		MyUser myUser = myUserRepository.findById(id)
 				.orElseThrow(() -> new MyUserNotFoundException("MyUser could not be deleted..."));
 
 		if (myUserRepository.findById(id).isPresent()) {
 
-			myUserRepository.deleteById(id);
+			if (myUser.getUsername().equals(activeUsername)) {
+				throw new ActiveUserCannotBeDeletedException("Active user cannot be deleted...");
+			} else {
+
+				myUserRepository.deleteById(id);
+			}
 		}
 
 		logger.trace("Exited......deleteMyUserById() ");
