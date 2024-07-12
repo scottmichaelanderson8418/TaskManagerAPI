@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.taskmanager.dto.MyUserDto;
@@ -24,7 +23,6 @@ import com.taskmanager.repository.MyUserRepository;
 import com.taskmanager.security.MyUserDetailService;
 import com.taskmanager.service.MyUserService;
 
-@RequestMapping(value = "/api")
 @RestController
 public class UserController {
 
@@ -61,6 +59,14 @@ public class UserController {
 		return new ResponseEntity<>("User found and deleted", HttpStatus.OK);
 	}
 
+	@GetMapping("/admin/activeuser")
+	public ResponseEntity<MyUserDto> getActiveUser() {
+		logger.trace("ENTERED……………………………………getActiveUser()");
+
+		logger.trace("EXITED……………………………………getActiveUser()");
+		return new ResponseEntity<>(userService.currentUser(), HttpStatus.OK);
+	}
+
 	@GetMapping("/admin/getallusers")
 	public ResponseEntity<List<MyUser>> getAllUsers() {
 		logger.trace("ENTERED……………………………………getAllUsers()");
@@ -72,12 +78,13 @@ public class UserController {
 
 	@GetMapping("/admin/user/{id}")
 	public ResponseEntity<MyUserDto> getUserDetail(@PathVariable("id") int id) {
+
 		logger.trace("ENTERED……………………………………getUserDetail()");
 		logger.trace("EXITED……………………………………getUserDetail()");
 		return new ResponseEntity<>(userService.getMyUserById(id), HttpStatus.OK);
 	}
 
-	@PutMapping("/admin/user/update/{id}")
+	@PutMapping("/admin/userdetail/update/{id}")
 	public ResponseEntity<MyUserDto> updateUserDetail(@RequestBody MyUserDto myUserUpdate, @PathVariable("id") int id) {
 		logger.trace("ENTERED……………………………………updateUserDetail()");
 

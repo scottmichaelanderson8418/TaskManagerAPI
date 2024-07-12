@@ -38,6 +38,7 @@ public class MyUserDetailService implements UserDetailsService {
 
 			// this will build an instance of UserDetailsService
 			// spring security will authenticate against this
+
 			return User.builder().username(userObj.getUsername()).password(userObj.getPassword())
 					.roles(getRoles(userObj)).build();
 

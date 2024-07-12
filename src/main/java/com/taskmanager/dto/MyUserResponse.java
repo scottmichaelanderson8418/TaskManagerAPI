@@ -4,13 +4,12 @@ import java.util.List;
 
 public class MyUserResponse {
 
+	private List<MyUserDto> username;
 	private boolean last;
 	private int pageNo;
 	private int pageSize;
-
 	private Long totalElements;
 	private int totalPages;
-	private List<MyUserDto> username;
 
 	public MyUserResponse() {
 

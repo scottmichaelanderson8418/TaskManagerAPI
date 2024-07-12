@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.taskmanager.dto.TaskDto;
@@ -17,10 +20,13 @@ import com.taskmanager.model.Task;
 import com.taskmanager.repository.TaskRepository;
 import com.taskmanager.service.TaskService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Service
 public class TaskServiceImpl implements TaskService {
 	Logger logger = LoggerFactory.getLogger(TaskServiceImpl.class.getName());
 
+	HttpServletRequest request;
 	private TaskRepository taskRepository;
 
 	public TaskServiceImpl(TaskRepository taskRepository) {
@@ -35,9 +41,11 @@ public class TaskServiceImpl implements TaskService {
 		// ... map properties from task to dto
 
 		taskDto.setUsername(task.getUsername());
+
 		taskDto.setContent(task.getContent());
 		taskDto.setComplete(task.isComplete());
 		logger.trace("EXITED……………………………………convertToDto()");
+
 		return taskDto;
 	}
 
@@ -45,9 +53,17 @@ public class TaskServiceImpl implements TaskService {
 	public TaskDto createTask(TaskDto taskDto) {
 		logger.trace("Entered......createTask() ");
 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		System.out.println("authentication.getPrincipal() = " + authentication.getPrincipal());
+
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		String username = userDetails.getUsername();
+		System.out.println("username = " + username);
+
 		Task task = new Task();
 
-		task.setUsername(taskDto.getUsername());
+		task.setUsername(username);
 		task.setContent(taskDto.getContent());
 		task.setComplete(taskDto.isComplete());
 
@@ -58,8 +74,15 @@ public class TaskServiceImpl implements TaskService {
 
 	public Task createTaskUpdate(Task task, TaskDto taskUpdate) {
 		logger.trace("Entered......createTaskUpdate() ");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-		task.setUsername(taskUpdate.getUsername());
+		System.out.println("authentication.getPrincipal() = " + authentication.getPrincipal());
+
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		String username = userDetails.getUsername();
+		System.out.println("username = " + username);
+
+		task.setUsername(username);
 		task.setContent(taskUpdate.getContent());
 		task.setComplete(taskUpdate.isComplete());
 		logger.trace("Exited......createTaskUpdate() ");
@@ -71,9 +94,13 @@ public class TaskServiceImpl implements TaskService {
 		logger.trace("Entered......deleteByTaskId() ");
 
 		Task task = taskRepository.findById(id)
-				.orElseThrow(() -> new MyUserNotFoundException("MyUser could not be deleted..."));
+				.orElseThrow(() -> new MyUserNotFoundException("Task with id = " + id + " could not be deleted..."));
+
+		if (taskRepository.findById(id).isPresent()) {
+			taskRepository.deleteById(id);
+		}
+
 		logger.trace("Exited......deleteByTaskId() ");
-		taskRepository.deleteById(id);
 
 	}
 
@@ -87,13 +114,21 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public TaskResponse getAllTasks(int pageNo, int pageSize) {
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+		String username = userDetails.getUsername();
+
 		logger.trace("Entered...........................getAllTasks()");
 
-		PageRequest pageable = PageRequest.of(pageNo, pageSize);
+		PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
 
-		Page<Task> task = taskRepository.findAll(pageable);
+		Page<Task> task = taskRepository.findAllTasksByUsername(username, pageRequest);
 
 		// this "task.getContent()" will get everything in the page
+
 		List<Task> taskList = task.getContent();
 
 		List<TaskDto> myTaskDtoList = taskList.stream().map(this::mapToDto).collect(Collectors.toList());

@@ -33,4 +33,16 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<ErrorObject>(errorObject, HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler(ActiveUserCannotBeDeletedException.class)
+	public ResponseEntity<ErrorObject> handleActiveUserCannotBeDeleted(ActiveUserCannotBeDeletedException ex,
+			WebRequest request) {
+
+		ErrorObject errorObject = new ErrorObject();
+		errorObject.setStatusCode(HttpStatus.METHOD_NOT_ALLOWED.value());
+		errorObject.setMessage(ex.getMessage());
+		errorObject.setTimestamp(new Date());
+
+		return new ResponseEntity<ErrorObject>(errorObject, HttpStatus.NOT_FOUND);
+	}
+
 }

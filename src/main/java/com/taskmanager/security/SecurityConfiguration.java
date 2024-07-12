@@ -53,17 +53,19 @@ public class SecurityConfiguration {
 	}
 
 	/*
-	 * Note: the "/login" end point is located in the securityFilterChain because we want it separate from the
-	 * RestController. Spring Security will create a "session
+	 * Note: the "/login" end point is located in the securityFilterChain because we
+	 * want it separate from the RestController. Spring Security will create a
+	 * "session
 	 */
 	// Provides a default configuration for me.
 	// "Everything behind the /login screen"
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-		// by customizing the "authorizeHttpRequest" we got rid of the default login we had
+		// by customizing the "authorizeHttpRequest" we got rid of the default login we
+		// had
 		// Note: "CSRF" Cross Site Request Forgery
-		// If "CSRF" is enabled all postrequest will be block
+		// If "CSRF" is enabled all postrequests will be block
 
 		return httpSecurity.csrf(AbstractHttpConfigurer::disable)
 
@@ -76,8 +78,8 @@ public class SecurityConfiguration {
 
 					// when we add httpSecurity we need to add the default formLogin page
 				}).formLogin(httpSecurityFormLoginConfigurer -> {
-					httpSecurityFormLoginConfigurer.loginPage("/login")
-							.successHandler(new AuthenticationAccessHandler()).permitAll();
+					httpSecurityFormLoginConfigurer.loginPage("/login").successHandler(new AuthenticationAccessHandler())
+							.permitAll();
 				}).build(); // build the HTTP Security
 
 	}

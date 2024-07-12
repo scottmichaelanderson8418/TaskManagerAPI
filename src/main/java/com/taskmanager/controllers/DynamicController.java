@@ -49,7 +49,7 @@ public class DynamicController {
 		logger.trace("ENTERED……………………………………handleUserHome()");
 		logger.trace("EXITED……………………………………handleUserHome()");
 
-		return "home_user :)";
+		return "home_user";
 	}
 
 	@GetMapping("/home")
@@ -62,7 +62,7 @@ public class DynamicController {
 
 	@GetMapping("/login")
 	public String handleLogin() {
-		System.out.println("POOOOOOOOOOOOOOOOOP");
+
 		logger.trace("ENTERED……………………………………handleLogin()");
 		logger.trace("EXITED……………………………………handleLogin()");
 

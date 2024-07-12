@@ -29,13 +29,14 @@ public class AuthenticationAccessHandler extends SavedRequestAwareAuthentication
 
 		if (isAdmin) {
 			setDefaultTargetUrl("/admin/home");
-			logger.trace("EXITED……………………………………onAuthenticationSuccess()");
+			logger.trace("EXITED……………………………………onAuthenticationSuccess()---> /admin/home");
 		} else {
+			logger.trace("EXITED……………………………………onAuthenticationSuccess()--> /user/home");
 			setDefaultTargetUrl("/user/home");
 		}
+
 		// setDefaultTargetUrl();
 		super.onAuthenticationSuccess(request, response, authentication);
 
-		logger.trace("EXITED……………………………………onAuthenticationSuccess()");
 	}
 }

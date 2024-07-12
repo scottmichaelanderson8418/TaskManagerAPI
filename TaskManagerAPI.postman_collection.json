@@ -1,14 +1,155 @@
 {
 	"info": {
-		"_postman_id": "a7772ae9-3b88-4130-8864-6966054d118b",
+		"_postman_id": "d671b67f-e32e-4798-a604-007b31d49241",
 		"name": "TaskManagerAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15945894",
-		"_collection_link": "https://planetary-spaceship-178806.postman.co/workspace/Scott_1~cc78b271-540d-4258-b264-7d0815bac579/collection/15945894-a7772ae9-3b88-4130-8864-6966054d118b?action=share&source=collection_link&creator=15945894"
+		"_exporter_id": "15945894"
 	},
 	"item": [
 		{
-			"name": "GET ALL MESSAGES",
+			"name": "REGISTER USER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\": \"ScottAdmin\",\r\n\"password\": \"1234\",\r\n\"role\":\"ADMIN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/register/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "ScottAdmin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE NEW TASK",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "ScottAdminUser",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"content\":\"Hi this is a task message\",\r\n\"complete\": \"false\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/task/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"task",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE TASK BY ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"content\":\"Hi scott your first message. Welcome my friend New Update #01:)\",\r\n\"complete\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/task/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"task",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL TASKS",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -53,7 +194,7 @@
 			"response": []
 		},
 		{
-			"name": "GET MESSAGE BY ID",
+			"name": "GET TASK BY ID",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -89,44 +230,13 @@
 			"response": []
 		},
 		{
-			"name": "UPDATE MESSAGE BY ID",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\"content\":\"Hi scott your first message. Welcome my friend New Update #01:)\",\r\n\"username\":\"ScottAdminUser\",\r\n\"complete\": \"true\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/task/update/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"task",
-						"update",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DELETE MESSAGE BY ID",
+			"name": "DELETE TASK BY ID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n\r\n\"name\":\"Scott Pokesdadasdasdmon\",\r\n\"type\": \"earth type\"\r\n\r\n\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -134,7 +244,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/task/delete/2",
+					"raw": "http://localhost:8080/api/task/delete/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -144,116 +254,7 @@
 						"api",
 						"task",
 						"delete",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CREATE NEW TASK MESSAGE",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "username",
-							"value": "ScottAdminUser",
-							"type": "string"
-						},
-						{
-							"key": "password",
-							"value": "1234",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\"content\":\"Hi scott your first mesWeeeesage\",\r\n\"username\":\"ScottAdminUser\",\r\n\"complete\": \"false\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/task/create",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"task",
-						"create"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "REGISTER USER",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\"username\": \"ScottAdminUser\",\r\n\"password\": \"1234\",\r\n\"role\":\"ADMIN,USER\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/register/user",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"register",
-						"user"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "LOGIN",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "username",
-							"value": "ScottAdminUser",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "1234",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:8080/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"login"
+						"1"
 					]
 				}
 			},
