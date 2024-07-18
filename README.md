@@ -13,13 +13,9 @@
 1. Register your user at "http://localhost:8080/register/user".
 2. Enter username, password, and role.
 - Note: the roles variable must be in the following format with no spaces:
--
-"USER,ADMIN"
--
-"ADMIN,USER"
--
-"USER"
--
-"ADMIN"
+  - "USER,ADMIN"
+  - "ADMIN,USER"
+  - "USER"
+  - "ADMIN"
 
 ## Step #03
