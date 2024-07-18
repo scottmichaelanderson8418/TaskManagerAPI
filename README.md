@@ -11,12 +11,15 @@
 <li> Run the TaskManagerAPI as a "Spring Boot App"</li>
 <li> Use the Postman API Platform and import the following .json files into Postman. The files are located in the TaskManagerAPI directory.
     <ul>
-    <li>- TaskManagerAPI.postman_collection.json</li>
-    <li>- TaskManagerAPI-USERS.postman_collection.json</li>
+    <li>TaskManagerAPI.postman_collection.json</li>
+    <li>TaskManagerAPI-USERS.postman_collection.json</li>
     </ul>
     
     </li>
 </ol>
+
+
+<br>
 <h2>Step #02</h2>
 
 Register User
