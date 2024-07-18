@@ -21,7 +21,15 @@
 ## Step #03
 1. Login your user at `http://localhost:8080/login`
 2. You will be authenticated and you will be authorized to access the endpoints accessible with your specified role.
-
+   
+## For Users without the "ADMIN" role
+- Users without "ADMIN" role can access the following Endpoints
+  - CREATE NEW TASK
+    - `http://localhost:8080/api/task/create`
+  - UPDATE TASK BY ID
+  - GET ALL TASKS
+  - GET TASK BY ID
+  - DELETE TASK BY ID
 
 ## For Users with "ADMIN" role
 - Users with "ADMIN" role can access the following Endpoints
