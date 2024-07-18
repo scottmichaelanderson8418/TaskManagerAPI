@@ -28,8 +28,6 @@
 1. Login your user at `http://localhost:8080/login`
 2. You will be authenticated and you will be authorized to access the endpoints accessible with your specified role.
 
-   
-
 ### Note: For Users without the "ADMIN" role
 
 -   Users without "ADMIN" role can access the following Endpoints
