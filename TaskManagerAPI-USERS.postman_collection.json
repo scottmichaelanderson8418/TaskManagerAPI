@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "8b451f3b-7ef2-4516-87ff-19ad0e7ef70b",
+		"_postman_id": "b767cf16-ed3d-4e7b-a95c-d28d99b64b53",
 		"name": "TaskManagerAPI-USERS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15945894"
+		"_exporter_id": "15945894",
+		"_collection_link": "https://planetary-spaceship-178806.postman.co/workspace/Scott_1~cc78b271-540d-4258-b264-7d0815bac579/collection/15945894-b767cf16-ed3d-4e7b-a95c-d28d99b64b53?action=share&source=collection_link&creator=15945894"
 	},
 	"item": [
 		{
@@ -127,7 +128,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/admin/user/delete/2",
+					"raw": "http://localhost:8080/admin/user/delete/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -137,7 +138,7 @@
 						"admin",
 						"user",
 						"delete",
-						"2"
+						"1"
 					]
 				}
 			},

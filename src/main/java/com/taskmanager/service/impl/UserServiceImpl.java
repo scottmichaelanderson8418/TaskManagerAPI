@@ -219,7 +219,9 @@ public class UserServiceImpl implements MyUserService {
 		System.out.println("authentication.getPrincipal() = " + authentication.getPrincipal());
 
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
 		String username = userDetails.getUsername();
+
 		System.out.println("username ================= " + username);
 
 		MyUser myUser = myUserRepository.findByUsername(userDetails.getUsername())

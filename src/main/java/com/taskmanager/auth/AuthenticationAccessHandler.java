@@ -11,7 +11,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//when
 public class AuthenticationAccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
 	Logger logger = LoggerFactory.getLogger(AuthenticationAccessHandler.class.getName());
@@ -19,8 +18,8 @@ public class AuthenticationAccessHandler extends SavedRequestAwareAuthentication
 	// when the login is a success then grant "ROLE_ADMIN" and land on the
 	// /admin/home or /user/home page
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws ServletException, IOException {
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+			throws ServletException, IOException {
 		logger.trace("ENTERED……………………………………onAuthenticationSuccess()");
 
 		// if the granted authority is equal to"ROLE_ADMIN"
