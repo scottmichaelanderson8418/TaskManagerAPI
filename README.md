@@ -7,9 +7,9 @@
     
 <ol>
 
-<li>1. Using Spring Tools Suite (or your prefered IDE) open TaskManagerAPI.</li>
-<li>2. Run the TaskManagerAPI as a "Spring Boot App"</li>
-<li>3. Use the Postman API Platform and import the following .json files into Postman. The files are located in the TaskManagerAPI directory.
+<li> Using Spring Tools Suite (or your prefered IDE) open TaskManagerAPI.</li>
+<li> Run the TaskManagerAPI as a "Spring Boot App"</li>
+<li> Use the Postman API Platform and import the following .json files into Postman. The files are located in the TaskManagerAPI directory.
     <ul>
     <li>- TaskManagerAPI.postman_collection.json</li>
     <li>- TaskManagerAPI-USERS.postman_collection.json</li>
