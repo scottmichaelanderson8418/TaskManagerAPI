@@ -22,3 +22,10 @@
 1. Login your user at "http://localhost:8080/login" 
 2. You will be authenticated and you will be authorized to access the endpoints accessible with your specified role.
 
+
+## For Users with "ADMIN"  
+1. Only users with "ADMIN" role can access the following Endpoints
+  - WHICH USER IS LOGGED IN --> "http://localhost:8080/admin/activeuser"
+  - GET ALL USERS --> "http://localhost:8080/admin/getallusers"
+  - GET USER BY ID --> "http://localhost:8080/admin/user/1"
+
