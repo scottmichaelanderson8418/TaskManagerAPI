@@ -15,15 +15,31 @@
     <li>TaskManagerAPI-USERS.postman_collection.json</li>
     </ul>
     
-
 </ol>
 
 
 
 <h2>Step #02</h2>
+<ol>
 
-Register User
- Register your user at "http://localhost:8080/register/user"
+<li>Register your user at "http://localhost:8080/register/user"</li>
+<li>Enter username, password, and role.</li>
+   <ul>
+    <li>   Note: the roles variable must be in the following format with no spaces:       </li>
+       <ul>
+           <li>"USER,ADMIN"</li>
+           <li>"ADMIN,USER"</li>
+           <li>"USER"</li>
+           <li>"ADMIN"</li>
+       </ul>
+
+    <li>TaskManagerAPI-USERS.postman_collection.json</li>
+    </ul>
+
+    
+</ol>
+
+ 
 5. Enter username, password, and role.
    Note: the roles variable must be in the following format with no spaces:
    --> "USER,ADMIN"
