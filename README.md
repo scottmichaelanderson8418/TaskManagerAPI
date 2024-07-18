@@ -24,7 +24,7 @@
 
 
 ## For Users with "ADMIN" role
-1. Users with "ADMIN" role can access the following Endpoints
+- Users with "ADMIN" role can access the following Endpoints
   - WHICH USER IS LOGGED IN --> `http://localhost:8080/admin/activeuser`
   - GET ALL USERS --> `http://localhost:8080/admin/getallusers`
   - GET USER BY ID --> `http://localhost:8080/admin/user/{id}`
