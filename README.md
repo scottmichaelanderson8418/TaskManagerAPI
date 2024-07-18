@@ -23,7 +23,7 @@
 <h2>Step #02</h2>
 <ol>
     <li>Register your user at "http://localhost:8080/register/user"</li>
-    <li>Enter username, password, and role.</li>
+    <li>Enter username, password, and role.
        <ul>
             <li>   Note: the roles variable must be in the following format with no spaces:      
                <ul>
