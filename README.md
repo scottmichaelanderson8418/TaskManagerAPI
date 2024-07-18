@@ -28,9 +28,11 @@
             <li>   Note: the roles variable must be in the following format with no spaces:      
                <ul>
                    <li>"USER,ADMIN"</li>
-               <li>"ADMIN,USER"</li>
-               <li>"USER"</li>
-               <li>"ADMIN"</li>
+                   <li>"ADMIN,USER"</li>
+                   <li>"USER"</li>
+                   <li>"ADMIN"</li>
+               </ul>
+           <li>
        </ul>
     </li>
 </ol>
