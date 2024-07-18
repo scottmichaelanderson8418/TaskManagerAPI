@@ -24,12 +24,11 @@
    
 ## For Users without the "ADMIN" role
 - Users without "ADMIN" role can access the following Endpoints
-  - CREATE NEW TASK
-    - `http://localhost:8080/api/task/create`
-  - UPDATE TASK BY ID
-  - GET ALL TASKS
-  - GET TASK BY ID
-  - DELETE TASK BY ID
+  - CREATE NEW TASK --> `http://localhost:8080/api/task/create`
+  - UPDATE TASK BY ID --> `http://localhost:8080/api/task/update/{id}`
+  - GET ALL TASKS --> `http://localhost:8080/api/getalltasks?pageNo=0&pageSize=10`
+  - GET TASK BY ID --> `http://localhost:8080/api/task/{id}`
+  - DELETE TASK BY ID --> `http://localhost:8080/api/task/delete/{id}`
 
 ## For Users with "ADMIN" role
 - Users with "ADMIN" role can access the following Endpoints
