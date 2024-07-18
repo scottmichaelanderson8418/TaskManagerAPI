@@ -19,7 +19,7 @@
 </ol>
 
 
-<br>
+
 <h2>Step #02</h2>
 
 Register User
