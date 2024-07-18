@@ -1,41 +1,21 @@
-<!DOCTYPE html>
 
-<html>
-	<body>
-		<h1>TaskManagerAPI - README</h1>
-		<h2>Step #01</h2>
+#TaskManagerAPI - README
 
-		<ol>
-			<li>Using Spring Tools Suite (or your prefered IDE) open TaskManagerAPI.</li>
-			<li>Run the TaskManagerAPI as a "Spring Boot App"</li>
-			<li>
-				Use the Postman API Platform and import the following .json files into Postman. The files are located in the TaskManagerAPI directory.
-				<ul>
-					<li>TaskManagerAPI.postman_collection.json</li>
-					<li>TaskManagerAPI-USERS.postman_collection.json</li>
-				</ul>
-			</li>
-		</ol>
+##Step #01
+Using Spring Tools Suite (or your preferred IDE), open TaskManagerAPI.
+Run the TaskManagerAPI as a "Spring Boot App".
+Use the Postman API Platform and import the following .json files into Postman. The files are located in the TaskManagerAPI directory.
+TaskManagerAPI.postman_collection.json
+TaskManagerAPI-USERS.postman_collection.json
 
-		<h2>Step #02</h2>
-		<ol>
-			<li>Register your user at "http://localhost:8080/register/user"</li>
-			<li>
-				Enter username, password, and role.
-				<ul>
-					<li>
-						Note: the roles variable must be in the following format with no spaces:
-						<ul>
-							<li>"USER,ADMIN"</li>
-							<li>"ADMIN,USER"</li>
-							<li>"USER"</li>
-							<li>"ADMIN"</li>
-						</ul>
-					</li>
+##Step #02
 
-					<li></li>
-				</ul>
-			</li>
-		</ol>
-	</body>
-</html>
+Register your user at "http://localhost:8080/register/user".
+Enter username, password, and role.
+Note: the roles variable must be in the following format with no spaces:
+"USER,ADMIN"
+"ADMIN,USER"
+"USER"
+"ADMIN"
+
+##Step #03
